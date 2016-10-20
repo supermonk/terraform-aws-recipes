@@ -1,7 +1,7 @@
 
 ## TODO: use container definitions resource https://www.terraform.io/docs/providers/aws/d/ecs_container_definition.html
-resource "template_file" "task_definition" {  
-  template = "${file("${path.root}/../templates/task-definitions/workerservice.json.tpl")}"
+resource "template_file" "task_definition" {
+  template = "${file("${path.module}/workerservice.json.tpl")}"
 
   vars {
     region                = "${var.region}"
@@ -32,5 +32,5 @@ resource "aws_ecs_service" "default" {
   name = "${var.ecs_service_name}"
   cluster = "${var.ecs_cluster_name}"
   task_definition = "${aws_ecs_task_definition.default.arn}"
-  desired_count = "${var.ecs_service_desired_count}"  
+  desired_count = "${var.ecs_service_desired_count}"
 }

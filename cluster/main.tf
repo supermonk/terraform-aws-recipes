@@ -45,7 +45,7 @@ resource "aws_security_group" "ecs" {
 }
 
 resource "template_file" "user_data" {
-  template = "${file("${path.root}/../templates/user-data.tpl")}"
+  template = "${file("${path.module}/user-data.tpl")}"
 
   vars {
     cluster_name = "${var.ecs_cluster_name}"

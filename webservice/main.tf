@@ -1,6 +1,6 @@
 ## TODO: use container definitions resource https://www.terraform.io/docs/providers/aws/d/ecs_container_definition.html
-resource "template_file" "task_definition" {  
-  template = "${file("${path.root}/../templates/task-definitions/webservice.json.tpl")}"
+resource "template_file" "task_definition" {
+  template = "${file("${path.module}/webservice.json.tpl")}"
 
   vars {
     region                = "${var.region}"
@@ -12,7 +12,7 @@ resource "template_file" "task_definition" {
     service_name          = "${var.ecs_service_name}"
     ecr_image             = "${var.ecr_image}"
     container_port        = "${var.ecs_service_web_container_port}"
-    host_port             = "${var.ecs_service_web_host_port}"    
+    host_port             = "${var.ecs_service_web_host_port}"
   }
 
   lifecycle {
@@ -39,7 +39,7 @@ resource "aws_alb_target_group" "default" {
   health_check {
     healthy_threshold = 5 /*Number of consecutive health check successes before declaring an EC2 instance healthy.*/
     unhealthy_threshold = 3 /*Number of consecutive health check failures before declaring an EC2 instance unhealthy.*/
-    timeout = 3    
+    timeout = 3
     path = "/${var.healthcheck_page_name}"
     interval = 30
   }
