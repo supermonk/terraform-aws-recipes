@@ -1,48 +1,48 @@
 /* ecs iam role and policies */
 resource "aws_iam_role" "ecs_role" {
   name               = "${var.ecs_cluster_name}-ecs-role"
-  assume_role_policy = "${file("${path.root}/../policies/ecs-role.json")}"
+  assume_role_policy = "${file("${path.module}/policies/ecs-role.json")}"
 }
 
 /* ecs service scheduler role */
 resource "aws_iam_role_policy" "ecs_service_role_policy" {
   name     = "${var.ecs_cluster_name}-ecs-service-role-policy"
-  policy   = "${file("${path.root}/../policies/ecs-service-role-policy.json")}"
+  policy   = "${file("${path.module}/policies/ecs-service-role-policy.json")}"
   role     = "${aws_iam_role.ecs_role.id}"
 }
 
 /* ec2 container instance role & policy */
 resource "aws_iam_role_policy" "ecs_instance_role_policy" {
   name     = "${var.ecs_cluster_name}-ecs-instance-role-policy"
-  policy   = "${file("${path.root}/../policies/ecs-instance-role-policy.json")}"
+  policy   = "${file("${path.module}/policies/ecs-instance-role-policy.json")}"
   role     = "${aws_iam_role.ecs_role.id}"
 }
 
 /* ec2 container instance policy to access ecr */
 resource "aws_iam_role_policy" "ecs_ecr_role_policy" {
   name     = "${var.ecs_cluster_name}-ecs-ecr-role-policy"
-  policy   = "${file("${path.root}/../policies/ecs-ecr-role-policy.json")}"
+  policy   = "${file("${path.module}/policies/ecs-ecr-role-policy.json")}"
   role     = "${aws_iam_role.ecs_role.id}"
 }
 
 /* ec2 container instance policy to access sqs */
 resource "aws_iam_role_policy" "ecs_sqs_access_policy" {
   name     = "${var.ecs_cluster_name}-ecs-sqs-access-policy"
-  policy   = "${file("${path.root}/../policies/ecs-sqs-access-policy.json")}"
+  policy   = "${file("${path.module}/policies/ecs-sqs-access-policy.json")}"
   role     = "${aws_iam_role.ecs_role.id}"
 }
 
 /* ec2 container instance policy to access sqs */
 resource "aws_iam_role_policy" "ecs_kms_decrypt_policy" {
   name     = "${var.ecs_cluster_name}-ecs-kms-decrypt-policy"
-  policy   = "${file("${path.root}/../policies/ecs-kms-decrypt-policy.json")}"
+  policy   = "${file("${path.module}/policies/ecs-kms-decrypt-policy.json")}"
   role     = "${aws_iam_role.ecs_role.id}"
 }
 
 /* ec2 container instance policy to access dynamodb */
 resource "aws_iam_role_policy" "ecs_dynamodb_access_policy" {
   name     = "${var.ecs_cluster_name}-ecs-dynamodb-access-policy"
-  policy   = "${file("${path.root}/../policies/ecs-dynamodb-access-policy.json")}"
+  policy   = "${file("${path.module}/policies/ecs-dynamodb-access-policy.json")}"
   role     = "${aws_iam_role.ecs_role.id}"
 }
 

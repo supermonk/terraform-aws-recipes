@@ -1,5 +1,5 @@
 resource "template_file" "ecr_access_policy" {
-  template = "${file("${path.root}/../policies/ecr-access-template.tpl")}"
+  template = "${file("${path.module}/policies/ecr-access-template.tpl")}"
   vars {
     account_ids = "${var.account_ids}"
   }
