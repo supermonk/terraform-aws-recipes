@@ -19,3 +19,7 @@ variable "search_instance_type" {}
 variable "search_instance_count" {}
 
 variable "is_search_critical" {}
+
+variable "lambda_s3_bucket_name" {}
+
+variable "lambda_function_name" {}
