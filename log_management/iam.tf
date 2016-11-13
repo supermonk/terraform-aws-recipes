@@ -6,7 +6,7 @@ data "aws_iam_policy_document" "default" {
       "kinesis:GetShardIterator"
     ],
     resources = [
-      "arn:aws:kinesis:::stream/${var.log_stream}"
+      "*"
     ]
   },
   statement {
@@ -31,7 +31,9 @@ data "aws_iam_policy_document" "default" {
   },
   statement {
     actions = [ "lambda:InvokeFunction" ],
-    resources = [ "arn:aws:lambda:::function:${var.lambda_function_name}" ]
+    resources = [
+      "arn:aws:lambda:::function:${var.lambda_function_name}"
+    ]
   },
   statement {
     actions = [ "kinesis:ListStreams" ],
