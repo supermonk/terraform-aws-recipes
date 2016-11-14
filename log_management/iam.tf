@@ -11,14 +11,11 @@ data "aws_iam_policy_document" "default" {
   },
   statement {
     actions = [
-      "es:DescribeElasticsearchDomain",
-      "es:DescribeElasticsearchDomains",
-      "es:DescribeElasticsearchDomainConfig",
-      "es:ListDomainNames",
-      "es:ListTags"
+      "es:*"
     ],
     resources = [
-      "*"
+      "${aws_elasticsearch_domain.default.arn}",
+      "${aws_elasticsearch_domain.default.arn}/*"
     ]
   },
   statement {
