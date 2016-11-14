@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "default" {
       "es:ListTags"
     ],
     resources = [
-      "${aws_elasticsearch_domain.default.arn}/*"
+      "*"
     ]
   },
   statement {
