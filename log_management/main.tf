@@ -7,6 +7,19 @@ data "aws_iam_policy_document" "esdomain_policy" {
     principals = [
       {
         type = "AWS",
+        identifiers = [ "${aws_iam_role.lambda_role.arn}" ]
+      }
+    ],
+    actions = [ "es:*" ],
+    resources = [
+      "arn:aws:es:::domain/${var.search_domain_name}/*",
+      "arn:aws:es:::domain/${var.search_domain_name}"
+    ]
+  }
+  ,statement {
+    principals = [
+      {
+        type = "AWS",
         identifiers = [ "*" ]
       }
     ],
@@ -19,21 +32,8 @@ data "aws_iam_policy_document" "esdomain_policy" {
       ]
     },
     resources = [
-      "arn:aws:es:::domain/${var.search_domain_name}",
-      "arn:aws:es:::domain/${var.search_domain_name}/*"
-    ]
-  },
-  statement {
-    principals = [
-      {
-        type = "AWS",
-        identifiers = [ "${aws_iam_role.lambda_role.arn}" ]
-      }
-    ],
-    actions = [ "es:*" ],
-    resources = [
-      "arn:aws:es:::domain/${var.search_domain_name}",
-      "arn:aws:es:::domain/${var.search_domain_name}/*"
+      "arn:aws:es:::domain/${var.search_domain_name}/*",
+      "arn:aws:es:::domain/${var.search_domain_name}"
     ]
   }
 }
