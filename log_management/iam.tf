@@ -6,7 +6,7 @@ data "aws_iam_policy_document" "default" {
       "kinesis:GetShardIterator"
     ],
     resources = [
-      "*"
+      "${aws_kinesis_stream.default.arn}"
     ]
   },
   statement {
@@ -34,7 +34,7 @@ data "aws_iam_policy_document" "default" {
   },
   statement {
     actions = [ "kinesis:ListStreams" ],
-    resources = [ "arn:aws:kinesis:::stream/*" ]
+    resources = [ "*" ]
   }
 }
 
