@@ -7,7 +7,7 @@ data "aws_iam_policy_document" "esdomain_policy" {
     principals = [
       {
         type = "AWS",
-        identifiers = [ "${aws_iam_role.lambda_role.arn}" ]
+        identifiers = [ "*" ]
       }
     ],
     actions = [
@@ -15,8 +15,7 @@ data "aws_iam_policy_document" "esdomain_policy" {
       "es:ESHttpPut"
     ],
     resources = [
-      "arn:aws:es:ap-southeast-2:*:domain/${var.search_domain_name}",
-      "arn:aws:es:ap-southeast-2:*:domain/${var.search_domain_name}*"
+      "arn:aws:es:ap-southeast-2:*:domain/${var.search_domain_name}/*"
     ]
   }
   ,statement {
