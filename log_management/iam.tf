@@ -6,7 +6,7 @@ data "aws_iam_policy_document" "default" {
       "kinesis:GetShardIterator"
     ],
     resources = [
-      "*"
+      "${aws_kinesis_stream.default.arn}"
     ]
   },
   statement {
@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "default" {
       "es:ListTags"
     ],
     resources = [
-      "arn:aws:es:::domain/${var.search_domain_name}"
+      "${aws_elasticsearch_domain.default.arn}/*"
     ]
   },
   statement {
@@ -48,7 +48,7 @@ resource "aws_iam_policy" "default" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-    name = "${var.log_stream}-to-${var.search_domain_name}-lambda-role"
+    name = "${var.lambda_function_name}-lambda-role"
     assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",

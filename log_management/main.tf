@@ -19,6 +19,7 @@ data "aws_iam_policy_document" "esdomain_policy" {
       ]
     },
     resources = [
+      "arn:aws:es:::domain/${var.search_domain_name}",
       "arn:aws:es:::domain/${var.search_domain_name}/*"
     ]
   },
@@ -30,7 +31,10 @@ data "aws_iam_policy_document" "esdomain_policy" {
       }
     ],
     actions = [ "es:*" ],
-    resources = [ "arn:aws:es:::domain/${var.search_domain_name}/*" ]
+    resources = [
+      "arn:aws:es:::domain/${var.search_domain_name}",
+      "arn:aws:es:::domain/${var.search_domain_name}/*"
+    ]
   }
 }
 
