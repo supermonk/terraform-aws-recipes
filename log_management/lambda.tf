@@ -5,6 +5,7 @@ resource "aws_lambda_function" "default" {
     role = "${aws_iam_role.lambda_role.arn}"
     handler = "index.handleApplicantEvent"
     runtime = "nodejs4.3"
+    timeout = "2"
 }
 
 resource "aws_lambda_event_source_mapping" "event_source_mapping" {

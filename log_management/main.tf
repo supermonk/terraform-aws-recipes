@@ -17,8 +17,22 @@ data "aws_iam_policy_document" "esdomain_policy" {
     resources = [
       "arn:aws:es:ap-southeast-2:*:domain/${var.search_domain_name}/*"
     ]
-  }
-  ,statement {
+  },
+  statement {
+    principals = [
+      {
+        type = "AWS",
+        identifiers = [ "${aws_iam_role.lambda_role.arn}" ]
+      }
+    ],
+    actions = [
+      "es:*"
+    ],
+    resources = [
+      "arn:aws:es:ap-southeast-2:*:domain/${var.search_domain_name}/*"
+    ]
+  },
+  statement {
     principals = [
       {
         type = "AWS",
