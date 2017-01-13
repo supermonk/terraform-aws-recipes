@@ -23,3 +23,7 @@ variable "is_search_critical" {}
 variable "lambda_s3_bucket_name" {}
 
 variable "lambda_function_name" {}
+
+variable "es_storage_volume" {
+  default = 10
+}
