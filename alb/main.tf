@@ -3,10 +3,10 @@ provider "aws" {
 }
 
 resource "aws_alb" "default" {
-  name            = "${var.cluster_name}-alb"
+  name            = "${var.alb_name}-alb"
   internal        = "${var.alb_is_internal}"
   security_groups = ["${aws_security_group.default.id}"]
-  subnets         = ["${split(",", var.elb_subnets)}"]
+  subnets         = ["${split(",", var.alb_subnets)}"]
 
   tags {
     Stream = "${var.stream_tag}"
@@ -14,7 +14,7 @@ resource "aws_alb" "default" {
 }
 
 resource "aws_alb_target_group" "default" {
-  name     = "${var.cluster_name}-alb-tg"
+  name     = "${var.alb_name}-alb-tg"
   port     = "80"
   protocol = "HTTP"
   vpc_id   = "${var.vpc_id}"
@@ -25,7 +25,7 @@ resource "aws_alb_listener" "default_https" {
   port = "443"
   protocol = "HTTPS"
   ssl_policy = "ELBSecurityPolicy-2015-05"
-  certificate_arn = "${var.elb_ssl_certificate_id}"
+  certificate_arn = "${var.alb_ssl_certificate_id}"
 
   default_action {
     type = "forward"
