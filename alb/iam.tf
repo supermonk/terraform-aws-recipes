@@ -1,5 +1,5 @@
 resource "aws_security_group" "default" {
-  name = "${var.cluster_name}-alb-sg"
+  name = "${var.alb_name}-alb-sg"
   description = "security group for alb"
   vpc_id = "${var.vpc_id}"
 

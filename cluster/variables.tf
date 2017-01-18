@@ -7,16 +7,6 @@ variable "ecs_cluster_name" {
   description = "The name of the Amazon ECS cluster."
 }
 
-variable "environment_tag" {
-  description = "Role of the ec2 instance, defaults to <DEV>"
-  default = "DEV"
-}
-
-variable "costcenter_tag" {
-  description = "Role of the ec2 instance, defaults to <DEV>"
-  default = "DEV"
-}
-
 variable "stream_tag" {
   description = "Team which owns this"
 }

@@ -97,16 +97,6 @@ resource "aws_autoscaling_group" "ecs" {
     value = "ECS"
     propagate_at_launch = true
   }
-  tag {
-    key = "Cost Center"
-    value = "${var.costcenter_tag}"
-    propagate_at_launch = true
-  }
-  tag {
-    key = "Environment"
-    value = "${var.environment_tag}"
-    propagate_at_launch = true
-  }
 
   lifecycle {
     create_before_destroy = true
