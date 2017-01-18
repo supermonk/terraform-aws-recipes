@@ -49,7 +49,7 @@ resource "aws_cloudwatch_metric_alarm" "health-check" {
   alarm_actions             = ["${var.eagle_eye_dashboard}", "arn:aws:sns:ap-southeast-2:047651431481:Mattb"]
 
   dimensions {
-    LoadBalancer = "${aws_alb.default.name}"
-    TargetGroup  = "${aws_alb_target_group.default.name}"
+    LoadBalancer = "${aws_alb.default.arn_suffix}"
+    TargetGroup  = "${aws_alb_target_group.default.arn_suffix}"
   }
 }
