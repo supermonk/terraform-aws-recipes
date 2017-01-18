@@ -8,7 +8,7 @@ resource "aws_cloudwatch_metric_alarm" "default" {
   statistic                 = "${var.statistic}"
   threshold                 = "${var.threshold}"
   alarm_description         = "${var.alarm_description}"
-  insufficient_data_actions = ["${var.eagle_eye_sns_topic_arn},${var.team_sns_topic_arn}"]
-  ok_actions                = ["${var.eagle_eye_sns_topic_arn},${var.team_sns_topic_arn}"]
-  alarm_actions             = ["${var.eagle_eye_sns_topic_arn},${var.team_sns_topic_arn}"]
+  insufficient_data_actions = ["${var.eagle_eye_sns_topic_arn}", "${var.team_sns_topic_arn}"]
+  ok_actions                = ["${var.eagle_eye_sns_topic_arn}", "${var.team_sns_topic_arn}"]
+  alarm_actions             = ["${var.eagle_eye_sns_topic_arn}", "${var.team_sns_topic_arn}"]
 }
