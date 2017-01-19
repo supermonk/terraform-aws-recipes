@@ -19,9 +19,17 @@ variable "alb_subnets" {
 
 variable "alb_ssl_certificate_id" {}
 
+<<<<<<< HEAD
 variable "stream_tag" {}
+
+variable "eagle_eye_dashboard" {
+  default = "arn:aws:sns:ap-southeast-2:047651431481:EagleEye-Development-Alerts"
+=======
+variable "stream_tag" {
+}
 
 variable "healthcheck_page_name" {
   description = "specify the health check page. value is optional"
   default = "HealthCheck"
+>>>>>>> b4b9a4ddc05a026f3b6e4f2fac865a75e45cff80
 }

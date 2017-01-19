@@ -14,14 +14,6 @@ variable "environment" {
   default = "Development"
 }
 
-variable "vpc_id" {
-  description = "The VPC"
-}
-
-variable "stream_tag" {
-  description = "stream name"
-}
-
 variable "log_group_name" {
 }
 

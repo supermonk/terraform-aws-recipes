@@ -18,6 +18,14 @@ resource "aws_alb_target_group" "default" {
   port     = "80"
   protocol = "HTTP"
   vpc_id   = "${var.vpc_id}"
+  
+  health_check {
+    healthy_threshold = 5 /*Number of consecutive health check successes before declaring an EC2 instance healthy.*/
+    unhealthy_threshold = 3 /*Number of consecutive health check failures before declaring an EC2 instance unhealthy.*/
+    timeout = 3
+    path = "/${var.healthcheck_page_name}"
+    interval = 30
+  }
 }
 
 resource "aws_alb_listener" "default_https" {

@@ -18,10 +18,6 @@ variable "vpc_id" {
   description = "The VPC"
 }
 
-variable "stream_tag" {
-  description = "stream name"
-}
-
 variable "log_group_name" {
 }
 
@@ -56,13 +52,13 @@ variable "ecs_service_web_host_port" {
 	default = "9050"	
 }
 
-variable "healthcheck_page_name" {
-  description = "specify the health check page. value is optional"
-  default = "HealthCheck"
-}
-
 variable "alb_listener_id" {
 }
 
 variable "alb_listener_path_pattern" {
 }
+
+variable "bounded_context" {
+}
+
+variable "alb_target_group_arn" {}
