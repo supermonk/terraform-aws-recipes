@@ -30,20 +30,6 @@ resource "aws_ecs_task_definition" "default" {
 }
 
 # ALB Configuration
-resource "aws_alb_target_group" "default" {
-  name     = "${var.ecs_service_name}-alb-tg"
-  port     = "80"
-  protocol = "HTTP"
-  vpc_id   = "${var.vpc_id}"
-
-  health_check {
-    healthy_threshold = 5 /*Number of consecutive health check successes before declaring an EC2 instance healthy.*/
-    unhealthy_threshold = 3 /*Number of consecutive health check failures before declaring an EC2 instance unhealthy.*/
-    timeout = 3
-    path = "/${var.healthcheck_page_name}"
-    interval = 30
-  }
-}
 
 resource "aws_alb_listener_rule" "default" {
   listener_arn = "${var.alb_listener_id}"
@@ -51,7 +37,7 @@ resource "aws_alb_listener_rule" "default" {
 
   action {
     type = "forward"
-    target_group_arn = "${aws_alb_target_group.default.arn}"
+    target_group_arn = "${var.alb_target_group_arn}"
   }
 
   condition {
@@ -67,7 +53,7 @@ resource "aws_ecs_service" "default" {
   desired_count = "${var.ecs_service_desired_count}"
   iam_role = "${var.ecs_role_name}"
   load_balancer {
-    target_group_arn = "${aws_alb_target_group.default.id}"
+    target_group_arn = "${var.alb_target_group_arn}"
     container_name = "${var.ecs_service_name}"
     container_port = "${var.ecs_service_web_container_port}"
   }
