@@ -23,3 +23,8 @@ variable "alb_ssl_certificate_id" {
 
 variable "stream_tag" {
 }
+
+variable "healthcheck_page_name" {
+  description = "specify the health check page. value is optional"
+  default = "HealthCheck"
+}
