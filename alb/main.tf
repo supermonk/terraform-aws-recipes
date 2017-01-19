@@ -18,13 +18,13 @@ resource "aws_alb_target_group" "default" {
   port     = "80"
   protocol = "HTTP"
   vpc_id   = "${var.vpc_id}"
-  
+
   health_check {
-    healthy_threshold = 5 /*Number of consecutive health check successes before declaring an EC2 instance healthy.*/
-    unhealthy_threshold = 3 /*Number of consecutive health check failures before declaring an EC2 instance unhealthy.*/
-    timeout = 3
-    path = "/${var.healthcheck_page_name}"
-    interval = 30
+    healthy_threshold   = 5                               /*Number of consecutive health check successes before declaring an EC2 instance healthy.*/
+    unhealthy_threshold = 3                               /*Number of consecutive health check failures before declaring an EC2 instance unhealthy.*/
+    timeout             = 3
+    path                = "/${var.healthcheck_page_name}"
+    interval            = 30
   }
 }
 
@@ -52,9 +52,9 @@ resource "aws_cloudwatch_metric_alarm" "health-check" {
   threshold           = "1"
 
   alarm_description         = "[[Standard format defined by Anton]]"
-  ok_actions                = ["${var.eagle_eye_dashboard}", "arn:aws:sns:ap-southeast-2:047651431481:Mattb"]
-  insufficient_data_actions = ["${var.eagle_eye_dashboard}", "arn:aws:sns:ap-southeast-2:047651431481:Mattb"]
-  alarm_actions             = ["${var.eagle_eye_dashboard}", "arn:aws:sns:ap-southeast-2:047651431481:Mattb"]
+  ok_actions                = ["${var.eagle_eye_sns_topic_arn}", "${var.team_sns_topic_arn}"]
+  insufficient_data_actions = ["${var.eagle_eye_sns_topic_arn}", "${var.team_sns_topic_arn}"]
+  alarm_actions             = ["${var.eagle_eye_sns_topic_arn}", "${var.team_sns_topic_arn}"]
 
   dimensions {
     LoadBalancer = "${aws_alb.default.arn_suffix}"

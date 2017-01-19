@@ -23,5 +23,13 @@ variable "stream_tag" {}
 
 variable "healthcheck_page_name" {
   description = "specify the health check page. value is optional"
-  default = "HealthCheck"
+  default     = "HealthCheck"
+}
+
+variable "eagle_eye_sns_topic_arn" {
+  description = "EagleEye dashboard SNS topic arn"
+}
+
+variable "team_sns_topic_arn" {
+  description = "The teams SNS topic, e.g. email list"
 }
